@@ -99,7 +99,7 @@ const getLeaderboard = async (req, res) => {
   try {
     const users = await User.find({ isAdmin: false })
       .sort({ coins: -1 })
-      .limit(10)
+      .limit(50)
       .select('-password');
     res.json(users);
   } catch (error) {
