@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ipl-bg: #0b0f19;
+  --color-ipl-card: #151b2b;
+  --color-ipl-card-hover: #1e2638;
+  --color-ipl-accent: #f59e0b; /* Amber 500 */
+  --color-ipl-accent-glow: rgba(245, 158, 11, 0.4);
+  --color-team-rcb: #ef4444; /* Red 500 */
+  --color-team-srh: #f97316; /* Orange 500 */
+  
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    background-color: theme('colors.ipl-bg');
+    color: #e2e8f0;
+    font-family: theme('fontFamily.sans');
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    background: theme('colors.ipl-card');
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 1rem;
+    transition: all 0.3s ease;
+  }
+  
+  .glass-panel:hover {
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, theme('colors.ipl-accent'), #d97706);
+    color: white;
+    font-weight: 600;
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 14px theme('colors.ipl-accent-glow');
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px theme('colors.ipl-accent-glow');
+  }
+
+  .btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+}
