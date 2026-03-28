@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
 import Navbar from './components/Navbar';
+import WinNotification from './components/WinNotification';
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -24,6 +25,7 @@ function App() {
   return (
     <div className="min-h-screen text-slate-200 selection:bg-ipl-accent selection:text-white pb-20 md:pb-0">
       {user && <Navbar />}
+      {user && <WinNotification />}
       
       <main className={`container mx-auto px-4 ${user ? 'pt-24' : 'pt-0'} md:pt-24`}>
         <Routes>

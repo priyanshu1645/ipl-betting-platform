@@ -34,22 +34,25 @@ const Dashboard = () => {
   useEffect(() => {
     if (!socket) return;
     
-    socket.on('matches_updated', () => {
+    const handleMatchesUpdated = () => {
       fetchData();
-    });
+    };
 
-    socket.on('match_resolved', async (data) => {
+    const handleMatchResolved = async (data) => {
       // Re-fetch all data to get updated results and wallet balance
       await fetchData();
       
       // Also fetch profile to get actual verified coins
       const profile = await api.get('/auth/profile');
       updateUser({ coins: profile.data.coins });
-    });
+    };
+
+    socket.on('matches_updated', handleMatchesUpdated);
+    socket.on('match_resolved', handleMatchResolved);
 
     return () => {
-      socket.off('matches_updated');
-      socket.off('match_resolved');
+      socket.off('matches_updated', handleMatchesUpdated);
+      socket.off('match_resolved', handleMatchResolved);
     };
   }, [socket]);
 

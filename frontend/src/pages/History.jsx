@@ -27,12 +27,14 @@ const History = () => {
     if (!socket) return;
     
     // Listen to matches updating so we can fetch real-time bet resolutions
-    socket.on('match_resolved', () => {
+    const handleMatchResolved = () => {
       fetchHistory();
-    });
+    };
+
+    socket.on('match_resolved', handleMatchResolved);
 
     return () => {
-      socket.off('match_resolved');
+      socket.off('match_resolved', handleMatchResolved);
     };
   }, [socket]);
 
